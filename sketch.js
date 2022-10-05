@@ -1,50 +1,66 @@
+// for red, green, and blue color values
+let r, g, b;
 
-let symmetry = 12;
-let angle = 360 / symmetry;
-let xoff = 0
+
+let x = 5;
+let y = 60;
+let dim = 800;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-angleMode(DEGREES);
-  background(0);
-translate(width/2,height/2);
-stroke(0);
-  for (let i = 0; i < symmetry; i++){
-  rotate(angle);
-  line(0, 0, width, 0); 
-  colorMode(HSB, 255, 255, 255);
-}
+  noStroke();
+createCanvas(windowWidth, windowHeight);
+  // Pick colors randomly
+  r = random(255);
+  g = random(255);
+  b = random(255);
+   createCanvas(windowWidth, windowHeight);
+  noStroke();
+  max_distance = dist(0, 0, width, height);
 
 
 }
 
 function draw() {
-  
-translate(width/2,height/2);
+  background(0);
+  // Animate by increasing our x value
+  x = x + 200;
+  // If the shape goes off the canvas, reset the position
+  if (x > width + dim) {
+    x = -dim;
+  // Draw a circle
+  strokeWeight(2);
+  stroke(r, g, b);
+  fill(r, g, b, 127);
+  ellipse(360, 200, 200, 200);}
+    
+    for (let i = 0; i <= width; i += 20) {
+    for (let j = 0; j <= height; j += 20) {
+      let size = dist(mouseX, mouseY, i, j);
+      size = (size / max_distance) * 66;
+      quad(i, j, size, size);
+      
+    }
+  }
+// When the user clicks the mouse
+function mousePressed() {
+  // Check if mouse is inside the circle
+  let d = dist(mouseX, mouseY, 360, 200);
+  if (d < 100) {
+    // Pick new random color values
+    r = random(255);
+    g = random(255);
+    b = random(255);
+  }
+}
  
-  let mx = mouseX - width/2
-  let my = mouseY - height/2
-   let pmx = pmouseX - width/2
-     let pmy = pmouseY - height/2
   
-     
-     if (mouseIsPressed){
-      let hu = noise(xoff)*255;
-      xoff += 0.01;
-       stroke(hu, 255, 255, 100);
-let angle = 360 / 12;
-  for (let i = 0; i < 12; i++){
-  rotate(angle);
-  let d = dist(mx, my, pmx, pmy);
- let sw = map(d, 0, 20, 20,1 ); 
-  strokeWeight(sw);
-  line(mx, my, pmx, pmy); 
-}
- }
+
+ 
+  
+
+  
 
 }
 
-
-
-
-
-
+ellipse
